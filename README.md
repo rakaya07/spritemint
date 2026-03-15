@@ -9,7 +9,7 @@
 [![Node.js](https://img.shields.io/badge/Node.js-v18+-green.svg?style=flat-square)](https://nodejs.org/)
 [![CLI Tool](https://img.shields.io/badge/CLI-Terminal-blue.svg?style=flat-square)](#)
 
-*Normalize sprites and extract sprite sheets directly from the terminal — no GUI required.*
+*Normalize sprites, extract sprite sheets, and build new sprite sheets — directly from the terminal, no GUI required.*
 
 </div>
 
@@ -25,6 +25,7 @@ $ spritemint
 ? What do you want to do?
 ❯ Normalize Sprites
   Extract Sprites from Sheet and Build Horizontal Output
+  Build Sprite Sheet from Selected PNGs
 ```
 
 ---
@@ -44,6 +45,14 @@ $ spritemint
 - ✂️ **Automatic Trimming**: Trims transparent edges from each extracted sprite automatically.
 - 🔄 **Normalization**: Normalizes each extracted sprite into an equal-sized square canvas.
 - 🎞️ **Horizontal Compositing**: Composites all sprites side-by-side into a single, seamless horizontal PNG strip, perfect for Unity animations.
+
+### 3️⃣ Build Sprite Sheet from Selected PNGs
+- ☑️ **Interactive File Picker**: Select any combination of PNG files from a folder using an interactive checkbox list.
+- 🗂️ **Flexible Layouts**: Choose between a **Horizontal Strip** (all sprites in one row) or a **Grid** (specify columns, rows calculated automatically).
+- 📏 **Configurable Cell Size**: Pick from 256, 512, or 1024 px — or enter a custom value.
+- 🎯 **Auto-Centering**: Every sprite is trimmed, scaled to fit the cell, and centered with equal padding on all sides.
+- 🖼️ **Transparent Canvas**: The output sheet is a fully transparent PNG — compositing-ready for Unity or any tool.
+- 💾 **Saves to Working Directory**: Output filename is configurable (defaults to `sheet.png`) and is written to wherever you invoked the CLI.
 
 ---
 
@@ -136,21 +145,47 @@ $ spritemint
   Canvas   : 2048×512px
 ```
 
+### 3. Build Sprite Sheet from Selected PNGs
+
+Combine individual PNG files into a new sprite sheet with full control over layout and cell size:
+
+```bash
+$ spritemint
+
+? What do you want to do?
+❯ Build Sprite Sheet from Selected PNGs
+
+? Select folder containing PNG files:
+❯ Use current folder
+
+? Select PNG files to include (use space to select):
+❯ ◉ hero_idle.png
+  ◉ hero_run1.png
+  ◉ hero_run2.png
+  ◉ hero_run3.png
+
+? Output layout:
+❯ Grid
+
+? Output cell size (px):
+❯ 512
+
+? Number of columns (4 images selected): 2
+
+? Output filename: hero_sheet.png
+
+  ✔ Done! Sprite sheet built from 4 images.
+
+  Images   : 4 selected
+  Layout   : Grid
+  Grid     : 2 cols × 2 rows
+  Cell     : 512×512px
+  Output   : /your/project/hero_sheet.png
+```
+
 ---
 
 ## 🗺️ Visual Workflow
-
-### Extracting & Building
-```text
-[ sheet_characters.png ]  (1024×1024, 2×2 grid)
-            │
-            ▼
-      🍃 SpriteMint
-    Extract → Normalize
-            │
-            ▼
-[ output-horizontal.png ]  (2048×512 seamless strip)
-```
 
 ### Normalizing Individual Sprites
 ```text
@@ -164,10 +199,34 @@ $ spritemint
     Center & Normalize
             │
             ▼
-[ NORMALIZED OUTPUT ]
+[ NORMALIZED OUTPUT ]  normalized/
   hero_idle.png   (512×512, centered on transparent canvas)
   hero_walk1.png
   hero_walk2.png
+```
+
+### Extracting & Building a Horizontal Strip
+```text
+[ sheet_characters.png ]  (1024×1024, 2×2 grid)
+            │
+            ▼
+      🍃 SpriteMint
+    Extract → Normalize
+            │
+            ▼
+[ output-horizontal.png ]  (2048×512 seamless strip)
+```
+
+### Building a Sheet from Selected PNGs
+```text
+[ INDIVIDUAL PNGs ]
+  hero_idle.png
+  hero_run1.png   ─────────┐
+  hero_run2.png             │  🍃 SpriteMint
+  hero_run3.png   ─────────┘  Select → Layout → Composite
+                              │
+                              ▼
+              [ hero_sheet.png ]  (1024×1024, 2×2 grid)
 ```
 
 ---
@@ -177,17 +236,19 @@ $ spritemint
 ```text
 spritemint/
 ├── bin/
-│   └── spritemint.js               # CLI entry point
+│   └── spritemint.js                    # CLI entry point
 ├── src/
-│   ├── index.js                    # Main menu & orchestration
+│   ├── index.js                         # Main menu & orchestration
 │   ├── commands/
-│   │   ├── normalize.js            # Flow: Normalize Sprites
-│   │   └── extractHorizontal.js    # Flow: Extract & Composite
+│   │   ├── normalize.js                 # Flow: Normalize Sprites
+│   │   ├── extractHorizontal.js         # Flow: Extract & Composite
+│   │   └── buildSheet.js                # Flow: Build Sprite Sheet
 │   ├── core/
 │   │   ├── normalizeSprites.js          # Logic: normalizing
-│   │   └── extractAndBuildHorizontal.js # Logic: extraction & comp.
+│   │   ├── extractAndBuildHorizontal.js # Logic: extraction & compositing
+│   │   └── buildSpriteSheet.js          # Logic: sheet building
 │   └── utils/
-│       └── image.js                # Utilities (Sharp manipulation)
+│       └── image.js                     # Utilities (Sharp manipulation)
 ├── package.json
 └── README.md
 ```
@@ -207,7 +268,7 @@ We are constantly aiming to make `SpriteMint` better. Planned features include:
 
 ## 🤝 Contributing
 
-Contributions are completely welcome and encouraged! Here’s how you can help:
+Contributions are completely welcome and encouraged! Here's how you can help:
 
 1. **Fork** the repository.
 2. Create your feature branch (`git checkout -b feature/AmazingFeature`).

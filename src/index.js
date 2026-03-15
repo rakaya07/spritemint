@@ -2,10 +2,12 @@ import inquirer from 'inquirer';
 import chalk from 'chalk';
 import { runNormalize } from './commands/normalize.js';
 import { runExtractHorizontal } from './commands/extractHorizontal.js';
+import { runBuildSheet } from './commands/buildSheet.js';
 
 const MENU_CHOICES = {
-  NORMALIZE: 'Normalize Sprites',
-  EXTRACT_HORIZONTAL: 'Extract Sprites from Sheet and Build Horizontal Output',
+  NORMALIZE:         'Normalize Sprites',
+  EXTRACT_HORIZONTAL:'Extract Sprites from Sheet and Build Horizontal Output',
+  BUILD_SHEET:       'Build Sprite Sheet from Selected PNGs',
 };
 
 async function main() {
@@ -26,6 +28,9 @@ async function main() {
       break;
     case MENU_CHOICES.EXTRACT_HORIZONTAL:
       await runExtractHorizontal();
+      break;
+    case MENU_CHOICES.BUILD_SHEET:
+      await runBuildSheet();
       break;
   }
 }
