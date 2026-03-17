@@ -30,6 +30,46 @@ $ spritemint
 
 ---
 
+## 📖 Help
+
+```bash
+$ spritemint --help
+# or
+$ spritemint -h
+```
+
+```
+SpriteMint — Unity Sprite Processor
+
+USAGE
+  spritemint           Interactive mode (main menu)
+  spritemint --help    Show this help message
+  spritemint -h        Show this help message
+
+COMMANDS (selected interactively)
+
+  1. Normalize Sprites
+     Resizes PNG files to fit a square canvas.
+     Aspect ratio is preserved, transparent padding is added.
+     Output: <folder>/normalized/
+
+  2. Extract Sprites from Sheet & Build Horizontal Output
+     Extracts frames from a grid-based sprite sheet,
+     normalizes each one, and builds a horizontal animation strip.
+     Output: <folder>/output_horizontal.png
+
+  3. Build Sprite Sheet from Selected PNGs
+     Combines multiple PNG files into a new sprite sheet.
+     Choose between horizontal strip or grid layout.
+     Output: <folder>/spritesheet_output.png
+
+REQUIREMENTS
+  - PNG image files
+  - Node.js v18+
+```
+
+---
+
 ## ✨ Features
 
 ### 1️⃣ Normalize Sprites
