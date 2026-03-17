@@ -32,40 +32,44 @@ $ spritemint
 
 ## 📖 Help
 
+Not sure what to do? Just run:
+
 ```bash
-$ spritemint --help
-# or
-$ spritemint -h
+spritemint --help
 ```
+
+> You can also use the shorthand: `spritemint -h`
+
+This will print a full usage guide directly in your terminal:
 
 ```
 SpriteMint — Unity Sprite Processor
 
 USAGE
-  spritemint           Interactive mode (main menu)
-  spritemint --help    Show this help message
-  spritemint -h        Show this help message
+  spritemint             Launch interactive menu
+  spritemint --help      Show this help message
+  spritemint -h          Show this help message
 
-COMMANDS (selected interactively)
-
-  1. Normalize Sprites
-     Resizes PNG files to fit a square canvas.
-     Aspect ratio is preserved, transparent padding is added.
-     Output: <folder>/normalized/
-
-  2. Extract Sprites from Sheet & Build Horizontal Output
-     Extracts frames from a grid-based sprite sheet,
-     normalizes each one, and builds a horizontal animation strip.
-     Output: <folder>/output_horizontal.png
-
-  3. Build Sprite Sheet from Selected PNGs
-     Combines multiple PNG files into a new sprite sheet.
-     Choose between horizontal strip or grid layout.
-     Output: <folder>/spritesheet_output.png
+COMMANDS
+  ┌─────────────────────────────────────────────────────────────────┐
+  │  1. Normalize Sprites                                           │
+  │     Resize PNGs to a square canvas with transparent padding.   │
+  │     Aspect ratio is always preserved.                          │
+  │     Output → <folder>/normalized/                              │
+  ├─────────────────────────────────────────────────────────────────┤
+  │  2. Extract Sprites from Sheet & Build Horizontal Output        │
+  │     Extract frames from a grid-based sprite sheet,             │
+  │     normalize each one, and stitch into a horizontal strip.    │
+  │     Output → <folder>/output_horizontal.png                    │
+  ├─────────────────────────────────────────────────────────────────┤
+  │  3. Build Sprite Sheet from Selected PNGs                       │
+  │     Pick individual PNGs and combine them into a sprite sheet. │
+  │     Supports horizontal strip or grid layout.                  │
+  │     Output → <folder>/spritesheet_output.png                   │
+  └─────────────────────────────────────────────────────────────────┘
 
 REQUIREMENTS
-  - PNG image files
-  - Node.js v18+
+  Node.js v18+   |   PNG image files
 ```
 
 ---
