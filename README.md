@@ -85,10 +85,11 @@ REQUIREMENTS
 
 ### 2️⃣ Extract Sprites from Sheet & Build Horizontal Output
 - 🧩 **Grid Extraction**: Accepts a sprite sheet PNG and extracts each grid cell using exact pixel coordinates.
-- 🔍 **Flexible Detection**: Supports **Manual Grid** detection (row/col input) or **Auto Detect** (falls back to 2×2).
+- 🔍 **Smart Auto Detect**: Analyses image dimensions to find the most likely grid — prefers square, power-of-two cells. If detection fails, falls back to asking you for rows and columns.
 - ✂️ **Automatic Trimming**: Trims transparent edges from each extracted sprite automatically.
 - 🔄 **Normalization**: Normalizes each extracted sprite into an equal-sized square canvas.
 - 🎞️ **Horizontal Compositing**: Composites all sprites side-by-side into a single, seamless horizontal PNG strip, perfect for Unity animations.
+- 📂 **Subfolder Scanning**: Searches the current folder and its immediate subdirectories for PNG files.
 
 ### 3️⃣ Build Sprite Sheet from Selected PNGs
 - ☑️ **Interactive File Picker**: Select any combination of PNG files from a folder using an interactive checkbox list.
@@ -169,9 +170,12 @@ $ spritemint
 
 ? Select PNG file:
 ❯ sheet_characters.png
+  sprites/hero_sheet.png
 
 ? Sprite detection mode:
-❯ Manual Grid
+❯ Auto Detect
+
+  ℹ Auto-detected grid: 2 rows × 2 cols
 
 ? Output cell size (px):
 ❯ 512
@@ -181,13 +185,15 @@ $ spritemint
   ✔ Done!
 
   Input    : /your/project/sheet_characters.png
-  Mode     : Manual Grid
+  Mode     : Auto Detect
   Grid     : 2 rows × 2 cols
-  Sprites  : 4
+  Sprites  : 4 / 4
   Cell size: 512×512px
   Output   : /your/project/output-horizontal.png
   Canvas   : 2048×512px
 ```
+
+> If Auto Detect cannot determine the grid (non-power-of-two dimensions), SpriteMint will automatically ask you to enter the row and column count manually.
 
 ### 3. Build Sprite Sheet from Selected PNGs
 
@@ -292,7 +298,8 @@ spritemint/
 │   │   ├── extractAndBuildHorizontal.js # Logic: extraction & compositing
 │   │   └── buildSpriteSheet.js          # Logic: sheet building
 │   └── utils/
-│       └── image.js                     # Utilities (Sharp manipulation)
+│       ├── folder.js                    # Shared folder/file selection prompts
+│       └── image.js                     # Shared image processing & SIZE_CHOICES
 ├── package.json
 └── README.md
 ```
@@ -303,7 +310,8 @@ spritemint/
 
 We are constantly aiming to make `SpriteMint` better. Planned features include:
 
-- [ ] **Advanced Auto Sprite Detection**: Automatically detect sprites in a sheet without a rigid grid (using alpha/pixel clustering).
+- [x] **Grid Auto Detection**: Detects grid layout from image dimensions (power-of-two cell analysis). Falls back to manual input if detection fails.
+- [ ] **Advanced Auto Sprite Detection**: Detect sprites without a rigid grid (using alpha/pixel clustering).
 - [ ] **GUI Version**: A standalone Desktop companion app (Electron/Tauri) for visual users.
 - [ ] **WebP/GIF Support**: Output configurations for highly-compressed formats.
 - [ ] **Custom Paddings & Offsets**: More granular controls over sprite placement on canvas.
