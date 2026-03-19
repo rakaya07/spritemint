@@ -120,7 +120,7 @@ spritemint
 ### Local / Development Setup
 
 ```bash
-git clone https://github.com/your-username/spritemint.git
+git clone https://github.com/rakaya07/spritemint.git
 cd spritemint
 npm install
 npm start

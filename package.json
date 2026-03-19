@@ -1,7 +1,7 @@
 {
   "name": "spritemint",
   "version": "1.0.0",
-  "description": "Interactive CLI tool for processing Unity sprite images",
+  "description": "Interactive CLI tool for normalizing, extracting, and building Unity sprite sheets",
   "main": "src/index.js",
   "bin": {
     "spritemint": "./bin/spritemint.js"
@@ -9,6 +9,23 @@
   "type": "module",
   "scripts": {
     "start": "node bin/spritemint.js"
+  },
+  "keywords": [
+    "sprite",
+    "spritesheet",
+    "unity",
+    "image",
+    "cli",
+    "normalize",
+    "extract",
+    "sharp",
+    "game-dev",
+    "pixel-art"
+  ],
+  "author": "Rafet",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
   },
   "dependencies": {
     "chalk": "^5.3.0",

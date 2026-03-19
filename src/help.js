@@ -38,7 +38,7 @@ ${chalk.bold('EXAMPLES')}
   ${chalk.cyan('spritemint --help')}
 
 ${chalk.bold('LINKS')}
-  GitHub   ${chalk.underline('https://github.com/rakaya06/spritemint')}
+  GitHub   ${chalk.underline('https://github.com/rakaya07/spritemint')}
   License  MIT
 `);
 }

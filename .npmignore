@@ -1,0 +1,22 @@
+# Development / environment
+.env
+.claude/
+
+# Git
+.git/
+.gitignore
+
+# Editor / OS
+.vscode/
+.idea/
+*.DS_Store
+Thumbs.db
+
+# Tests (if added later)
+test/
+tests/
+*.test.js
+*.spec.js
+
+# CI / config (if added later)
+.github/
